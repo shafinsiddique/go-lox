@@ -16,8 +16,9 @@ func startInterpretation(fileName string) {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
+
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		GetTokens(scanner.Text())
 	}
 }
 
@@ -30,5 +31,4 @@ func main() {
 	}
 
 	startInterpretation(args[1])
-
 }
