@@ -25,5 +25,5 @@ func main() {
 		return
 	}
 
-	startInterpretation(args[1])
+	//startInterpretation(args[1])
 }
