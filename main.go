@@ -1,25 +1,20 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
 )
 
 func startInterpretation(fileName string) {
-	file, err := os.Open(fileName)
-
+	data, err := ioutil.ReadFile(fileName)
 	if err != nil {
+		fmt.Println("File reading error", err)
 		return
 	}
 
-	defer file.Close()
+	GetTokensFromSource(string(data))
 
-	scanner := bufio.NewScanner(file)
-
-	for scanner.Scan() {
-		GetTokens(scanner.Text())
-	}
 }
 
 func main() {
