@@ -14,32 +14,10 @@ func GetTokensFromSource(source string) string {
 func scanToken(source string, tokens *[]Token, currentPosition *int, line *int) {
 	current := *currentPosition
 	token := new(Token)
-	switch currentChar := source[current]; currentChar {
-	case '(':
-		*token = Token{Lexeme: "(", Line: *line, TokenType: LEFT_PAREN}
-	case ')':
-		*token = Token{Lexeme: "(", Line: *line, TokenType: RIGHT_PAREN}
-	case '\n':
-		*line += 1
-	case ':':
-		*token = Token{Lexeme: ":", Line: *line, TokenType: COLON}
-	case ';':
-		*token = Token{Lexeme: ";", Line: *line, TokenType: SEMI_COLON}
-	case '+':
-		*token = Token{Lexeme: "+", Line: *line, TokenType: ADD}
-
-	case '-':
-		*token = Token{Lexeme: "-", Line: *line, TokenType: SUBTRACT}
-
-	case '*':
-		*token = Token{Lexeme: "*", Line: *line, TokenType: MULTIPY}
-
-	case '/':
-		*token = Token{Lexeme: "/", Line: *line, TokenType: DIVIDE}
+	currentChar := string(source[current])
+	if val, ok := OneCharLexemes[currentChar]; ok {
+		*token = Token{Lexeme: currentChar, TokenType: val, Line: *line}
+	} else if currentChar == "!" {
 	}
 
-	if token != nil {
-		*tokens = append(*tokens, *token)
-
-	}
 }
