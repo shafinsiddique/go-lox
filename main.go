@@ -24,6 +24,5 @@ func main() {
 		fmt.Printf("usage: go-lox <script>")
 		return
 	}
-
 	startInterpretation(args[1])
 }

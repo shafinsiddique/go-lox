@@ -1,7 +1,7 @@
 package main
 
 type Token struct {
-	TokenType string
+	TokenType TokenType
 	Lexeme    string
-	Line      string
+	Line      int
 }
