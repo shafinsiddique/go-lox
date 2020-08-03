@@ -1,6 +1,6 @@
 package main
 
-var OneCharLexemes = map[string]TokenType{
+var AllLexemes = map[string]TokenType{
 	":": COLON,
 	"(": LEFT_PAREN,
 	")": RIGHT_PAREN,
@@ -9,4 +9,11 @@ var OneCharLexemes = map[string]TokenType{
 	"-": SUBTRACT,
 	"*": MULTIPY,
 	"/": DIVIDE,
+}
+
+var TwoCharLexemes = map[string]string{
+	"!": "=",
+	"=": "=",
+	">": "<",
+	"<": "=",
 }

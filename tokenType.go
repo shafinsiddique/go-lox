@@ -19,3 +19,7 @@ var SUBTRACT = TokenType{Name: "SUBTRACT"}
 var MULTIPY = TokenType{Name: "MULTIPLY"}
 
 var DIVIDE = TokenType{Name: "DIVIDE"}
+
+var EQUAL_EQUAL = TokenType{Name: "EQUAL_EQUAL"}
+
+var EQUAL = TokenType{Name: "EQUAL_EQUAL"}
