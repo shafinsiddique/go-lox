@@ -23,3 +23,15 @@ var DIVIDE = TokenType{Name: "DIVIDE"}
 var EQUAL_EQUAL = TokenType{Name: "EQUAL_EQUAL"}
 
 var EQUAL = TokenType{Name: "EQUAL_EQUAL"}
+
+var EXCLAMATION = TokenType{Name: "EXCLAMATION"}
+
+var NOT_EXCLAMATION = TokenType{Name: "NOT_EXCLAMATION"}
+
+var GREATER = TokenType{Name: "GREATER"}
+
+var LESSER = TokenType{Name: "LESSER"}
+
+var GREATER_EQUAL = TokenType{Name: "GREATER_EQUAL"}
+
+var LESSER_EQUAL = TokenType{Name: "LESSER_EQUAL"}

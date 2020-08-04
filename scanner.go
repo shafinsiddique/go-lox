@@ -13,20 +13,23 @@ func GetTokensFromSource(source string) string {
 
 func scanToken(source string, tokens *[]Token, currentPosition *int, line *int) {
 	current := *currentPosition
-	token := new(Token)
+	token := Token{}
 	currentChar := string(source[current])
 
 	if _, ok := TwoCharLexemes[currentChar]; ok {
-		handleTwoCharLexeme(source, currentPosition, *line)
+		token = getTokenFromTwoCharLexeme(source, currentPosition, *line)
 	} else if val, ok := AllLexemes[currentChar]; ok {
-		*token = Token{Lexeme: currentChar, TokenType: val, Line: *line}
+		token = Token{Lexeme: currentChar, TokenType: val, Line: *line}
+	}
+
+	if token.IsInitialized() {
+		*tokens = append(*tokens, token)
 	}
 
 }
 
-func handleTwoCharLexeme(source string, currentPosition *int, line int) {
+func getTokenFromTwoCharLexeme(source string, currentPosition *int, line int) Token {
 	currentChar := string(source[*currentPosition])
-	token := new(Token)
 	val, _ := TwoCharLexemes[currentChar]
 	lexeme := currentChar
 	if peek(source, *currentPosition, val) {
@@ -34,7 +37,7 @@ func handleTwoCharLexeme(source string, currentPosition *int, line int) {
 		lexeme += val
 	}
 	tokenType, _ := AllLexemes[lexeme]
-	*token = Token{Lexeme: lexeme, TokenType: tokenType, Line: line}
+	return Token{Lexeme: lexeme, TokenType: tokenType, Line: line}
 }
 
 func peek(source string, position int, character string) bool {
