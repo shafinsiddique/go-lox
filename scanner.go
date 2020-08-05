@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func GetTokensFromSource(source string) string {
+func GetTokensFromSource(source string) []Token {
 	current := 0
 	line := 1
 	var tokens []Token
@@ -17,7 +17,7 @@ func GetTokensFromSource(source string) string {
 		x += 1
 	}
 
-	return "hello"
+	return tokens
 }
 
 func scanToken(source string, tokens *[]Token, currentPosition *int, line *int) {
