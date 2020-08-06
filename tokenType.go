@@ -35,3 +35,5 @@ var LESSER = TokenType{Name: "LESSER"}
 var GREATER_EQUAL = TokenType{Name: "GREATER_EQUAL"}
 
 var LESSER_EQUAL = TokenType{Name: "LESSER_EQUAL"}
+
+var STRING = TokenType{Name: "STRING"}

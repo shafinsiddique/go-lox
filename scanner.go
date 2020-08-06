@@ -30,14 +30,39 @@ func scanToken(source string, tokens *[]Token, currentPosition *int, line *int) 
 		token = Token{Lexeme: currentChar, TokenType: val, Line: *line}
 		*currentPosition += 1
 	} else if source[*currentPosition] == '\n' || source[*currentPosition] == '\r' {
-		handleNewLineCharacter(source, currentPosition)
-		*line += 1
+		handleNewLineCharacter(source, currentPosition, line)
+	} else if source[*currentPosition] == '"' {
+		token = handleStrings(source, currentPosition, line)
 	}
 
 	if token.IsInitialized() {
 		*tokens = append(*tokens, token)
 	}
 
+}
+
+func handleStrings(source string, currentPosition *int, line *int) Token {
+	var str string = string(source[*currentPosition])
+	startingLine := *line
+	*currentPosition += 1
+
+	for *currentPosition < len(source) && source[*currentPosition] != '"' {
+		str += string(source[*currentPosition])
+
+		if source[*currentPosition] == '\r' || source[*currentPosition] == '\n' {
+			handleNewLineCharacter(source, currentPosition, line)
+		} else {
+			*currentPosition += 1
+		}
+
+	}
+
+	if *currentPosition == len(source) {
+		return Token{}
+	} else {
+		str += "\""
+		return Token{Lexeme: str, TokenType: STRING, Line: startingLine}
+	}
 }
 
 func getTokenFromTwoCharLexeme(source string, currentPosition *int, line int) Token {
@@ -54,8 +79,6 @@ func getTokenFromTwoCharLexeme(source string, currentPosition *int, line int) To
 
 func peek(source string, position int, character string) bool {
 	if position < len(source)-1 {
-		peeker := string(source[position+1])
-		fmt.Println(peeker)
 		if string(source[position+1]) == character {
 			return true
 		}
@@ -63,10 +86,11 @@ func peek(source string, position int, character string) bool {
 	return false
 }
 
-func handleNewLineCharacter(source string, current *int) {
+func handleNewLineCharacter(source string, current *int, line *int) {
 	if source[*current] == '\r' {
 		*current += 2
 	} else {
 		*current += 1
 	}
+	*line += 1
 }
