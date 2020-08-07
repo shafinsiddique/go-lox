@@ -33,6 +33,8 @@ func scanToken(source string, tokens *[]Token, currentPosition *int, line *int) 
 		handleNewLineCharacter(source, currentPosition, line)
 	} else if source[*currentPosition] == '"' {
 		token = handleStrings(source, currentPosition, line)
+	} else if source[*currentPosition] == ' ' {
+		*currentPosition += 1
 	}
 
 	if token.IsInitialized() {
@@ -61,6 +63,7 @@ func handleStrings(source string, currentPosition *int, line *int) Token {
 		return Token{}
 	} else {
 		str += "\""
+		*currentPosition += 1
 		return Token{Lexeme: str, TokenType: STRING, Line: startingLine}
 	}
 }
