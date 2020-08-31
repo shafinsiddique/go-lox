@@ -2,6 +2,12 @@ package main
 
 import "fmt"
 
+func isLetter(character byte) bool {
+	if character >= 'a' && character <= 'z' || character >= 'A' && character <= 'Z' {
+		return true
+	}
+	return false
+}
 func GetTokensFromSource(source string) []Token {
 	current := 0
 	line := 1
@@ -35,10 +41,22 @@ func scanToken(source string, tokens *[]Token, currentPosition *int, line *int) 
 		token = handleStrings(source, currentPosition, line)
 	} else if source[*currentPosition] == ' ' {
 		*currentPosition += 1
+	} else if isLetter(source[*currentPosition]) {
+		token = handleReservedWord(source, currentPosition, line)
 	}
-
+	// to handle : numbers and reserved words.
 	if token.IsInitialized() {
 		*tokens = append(*tokens, token)
+	}
+
+}
+
+func handleReservedWord(source string, currentPosition *int, line *int) Token {
+	var word string
+
+	for *currentPosition < len(source) && !isLetter(source[*currentPosition]) {
+		word += string(source[*currentPosition])
+		*currentPosition += 1
 	}
 
 }
@@ -56,11 +74,11 @@ func handleStrings(source string, currentPosition *int, line *int) Token {
 		} else {
 			*currentPosition += 1
 		}
-
 	}
 
 	if *currentPosition == len(source) {
 		return Token{}
+
 	} else {
 		str += "\""
 		*currentPosition += 1

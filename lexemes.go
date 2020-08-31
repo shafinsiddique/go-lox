@@ -13,6 +13,9 @@ var AllLexemes = map[string]TokenType{
 	"!=": NOT_EXCLAMATION,
 	"=":  EQUAL,
 	"==": EQUAL_EQUAL,
+	"var":VAR,
+	"if":IF,
+	"else":
 }
 
 var TwoCharLexemes = map[string]string{
