@@ -22,7 +22,7 @@ var DIVIDE = TokenType{Name: "DIVIDE"}
 
 var EQUAL_EQUAL = TokenType{Name: "EQUAL_EQUAL"}
 
-var EQUAL = TokenType{Name: "EQUAL_EQUAL"}
+var EQUAL = TokenType{Name: "EQUAL"}
 
 var EXCLAMATION = TokenType{Name: "EXCLAMATION"}
 
@@ -38,6 +38,10 @@ var LESSER_EQUAL = TokenType{Name: "LESSER_EQUAL"}
 
 var STRING = TokenType{Name: "STRING"}
 
-var VAR = TokenType{Name: "VAR"}
+var VAR = TokenType{Name: "var"}
 
-var IF = TokenType{Name: "IF"}
+var IF = TokenType{Name: "if"}
+
+var ELSE = TokenType{Name: "else"}
+
+var IDENTIFER = TokenType{Name: "IDENTIFIER"}

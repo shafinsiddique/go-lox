@@ -1,3 +1,4 @@
 :;+
 - "shafin"
 "this is a string"
+var shafin =

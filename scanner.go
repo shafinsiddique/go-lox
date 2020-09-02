@@ -53,16 +53,22 @@ func scanToken(source string, tokens *[]Token, currentPosition *int, line *int) 
 
 func handleReservedWord(source string, currentPosition *int, line *int) Token {
 	var word string
-
-	for *currentPosition < len(source) && !isLetter(source[*currentPosition]) {
+	tType := IDENTIFER
+	for *currentPosition < len(source) && isLetter(source[*currentPosition]) {
 		word += string(source[*currentPosition])
 		*currentPosition += 1
 	}
 
+	if val, ok := keywords[word]; ok {
+		tType = val
+	}
+
+	return Token{Lexeme: word, TokenType: tType, Line: *line}
+
 }
 
 func handleStrings(source string, currentPosition *int, line *int) Token {
-	var str string = string(source[*currentPosition])
+	var str = string(source[*currentPosition])
 	startingLine := *line
 	*currentPosition += 1
 
@@ -93,6 +99,8 @@ func getTokenFromTwoCharLexeme(source string, currentPosition *int, line int) To
 	if peek(source, *currentPosition, val) {
 		*currentPosition += 2
 		lexeme += val
+	} else {
+		*currentPosition += 1
 	}
 	tokenType, _ := AllLexemes[lexeme]
 	return Token{Lexeme: lexeme, TokenType: tokenType, Line: line}

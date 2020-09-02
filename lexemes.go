@@ -13,9 +13,6 @@ var AllLexemes = map[string]TokenType{
 	"!=": NOT_EXCLAMATION,
 	"=":  EQUAL,
 	"==": EQUAL_EQUAL,
-	"var":VAR,
-	"if":IF,
-	"else":
 }
 
 var TwoCharLexemes = map[string]string{
@@ -23,4 +20,10 @@ var TwoCharLexemes = map[string]string{
 	"=": "=",
 	">": "<",
 	"<": "=",
+}
+
+var keywords = map[string]TokenType{
+	"var":  VAR,
+	"if":   IF,
+	"else": ELSE,
 }
